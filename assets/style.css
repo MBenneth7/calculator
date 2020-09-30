@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid orange;
+    border-radius: 100px;
+    font-size: 1.5em;
+}
+
+.reset{
+    grid-area: reset;
+}
+
+.neg-pos{
+    grid-area: neg-pos;
+}
+
+.percent{
+    grid-area: percent;
+}
+
+.divide{
+    grid-area: divide;
+}
+
+.seven{
+    grid-area: seven;
+}
+
+.eight{
+    grid-area: eight;
+}
+
+.nine{
+    grid-area: nine;
+}
+
+.product{
+    grid-area: product;
+}
+
+.four{
+    grid-area: four;
+}
+
+.five{
+    grid-area: five;
+}
+
+.six{
+    grid-area: six;
+}
+
+.subtract{
+    grid-area: subt;
+}
+
+.one{
+    grid-area: one;
+}
+
+.two{
+    grid-area: two;
+}
+
+.three{
+    grid-area: three;
+}
+
+.add{
+    grid-area: sum
+}
+
+.zero{
+    grid-area: ze;
+    justify-content: flex-start;
+    padding-left: 39px;
+}
+
+.decimal{
+    grid-area: deci;
+}
+
+.eqaul{
+    grid-area: equal;
+}
+
+.display{
+    grid-area: display;
+    border: 1px solid black;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+
+#calc-container{
+    margin-top: 120px;
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px 100px 100px;
+    grid-gap: 5px;
+    grid-template-areas:
+    "display display display display" 
+    "reset neg-pos percent divide"
+    "seven eight nine product"
+    "four five six subt"
+    "one two three sum"
+    "ze ze deci equal"
+    ;
+}
