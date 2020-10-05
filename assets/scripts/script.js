@@ -18,25 +18,28 @@ const percent =  document.querySelector(".percent");
 const negPos =  document.querySelector(".neg-pos");
 const reset =  document.querySelector(".reset");
 
+//ARRAY AND TO KEEP TRACK OF NUMBERS BEING INPUT BY USER, OUR ARRAY WILL HOLD TWO NUMBERS AT MOST.
+const numbers = [];
+
 //VARIABLES TO DISPLAY CURRENT NUMBER ON SCREEN AND CONTAIN OUR CURRENT ANSWER
 let display = "0";
 let ans = 0;
 
-//KEEP TRACK OF FIRST TWO INITIAL NUMBERS TO START OFF
-let first = 0;
-let second = 0;
 
 //HAVE A VARIABLE KEEP TRACK OF AN OPERATOR
 let operator = "";
 
-function returnZero(){
-    zero.addEventListener("click",()=>{
-    display += "0";
-    console.log(display);
-    });
-}
+function returnNumbersOperators(){
 
-function returnOne(){
+    zero.addEventListener("click",()=>{
+        if(display === "0")
+            display = "0";
+        else{        
+            display += "0";
+        }    
+        console.log(display);
+    });
+
     one.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -47,9 +50,7 @@ function returnOne(){
         }     
         console.log(display);
     });
-}
 
-function returnTwo(){
     two.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -60,9 +61,7 @@ function returnTwo(){
         }     
         console.log(display);
     });
-}
 
-function returnThree(){
     three.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -73,9 +72,7 @@ function returnThree(){
         }     
         console.log(display);
     });
-}
 
-function returnFour(){
     four.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -86,9 +83,7 @@ function returnFour(){
         }     
         console.log(display);
     });
-}
 
-function returnFive(){
     five.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -99,9 +94,7 @@ function returnFive(){
         }     
         console.log(display);
     });
-}
 
-function returnSix(){
     six.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -112,9 +105,7 @@ function returnSix(){
         }     
         console.log(display);
     });
-}
 
-function returnSeven(){
     seven.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -125,9 +116,7 @@ function returnSeven(){
         }     
         console.log(display);
     });
-}
 
-function returnEight(){
     eight.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -138,9 +127,7 @@ function returnEight(){
         }     
         console.log(display);
     });
-}
 
-function returnNine(){
     nine.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
@@ -151,12 +138,97 @@ function returnNine(){
         }     
         console.log(display);
     });
-}
 
-function reSet(){
     reset.addEventListener("click",()=>{
         display = "0";
+        numbers.length = 0;
         console.log(display);
+    });
+
+    add.addEventListener("click",()=>{
+
+        let current = Number(display);
+        operator = "+";
+
+        if(numbers.length < 1){
+            //ON THE FIRST START 'numbers' ARRAY LENGTH IS "0", WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE FIRST NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
+            numbers.push(current);
+            display = "0";
+        }    
+        else{
+            //ON CONSECTIVE USE, WE WILL USE 'unshift()' TO PLACE SECOND NUMBER INTO THE BEGINNING OF ARRAY THAT WAY WHEN WE 'pop()' IT WILL
+            //GRAB OUR FIRST NUMBER ENTERED.
+
+            numbers.push(current);
+            display = "0";
+
+            //TAKING OUT TWO NUMBERS TO PERFORM OUR OPERATIONS ON IT    
+            let first = numbers.pop();
+            let second = numbers.pop();
+
+            //NUMBERS ARRAY IS CURRENTLY AT LENGTH "0"
+            operate(operator, first, second);
+        }    
+    });
+
+    multiply.addEventListener("click",()=>{
+
+        let current = Number(display);
+        operator = "*";
+
+        if(numbers.length < 1){
+            //ON THE FIRST START 'numbers' ARRAY LENGTH IS "0", WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE FIRST NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
+            numbers.push(current);
+            display = "0";
+        }    
+        else{
+            //ON CONSECTIVE USE, WE WILL USE 'unshift()' TO PLACE SECOND NUMBER INTO THE BEGINNING OF ARRAY THAT WAY WHEN WE 'pop()' IT WILL
+            //GRAB OUR FIRST NUMBER ENTERED.
+
+            numbers.unshift(current);
+            display = "0";
+
+            //TAKING OUT TWO NUMBERS TO PERFORM OUR OPERATIONS ON IT    
+            let first = numbers.pop();
+            let second = numbers.pop();
+
+            //NUMBERS ARRAY IS CURRENTLY AT LENGTH "0"
+            operate(operator, first, second);
+        } 
+    });
+
+    subtract.addEventListener("click",()=>{
+        let current = Number(display);
+        //WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE CURRENT NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
+        numbers.push(current);
+        display = "0"; 
+        operator = "-";
+    });
+
+    divide.addEventListener("click",()=>{
+        let current = Number(display);
+        //WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE CURRENT NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
+        numbers.push(current); 
+        display = "0";
+        operator = "/";
+    });
+
+    equal.addEventListener("click",()=>{
+
+        let current = Number(display);
+
+        //USING 'unshift()' TO PLACE SECOND NUMBER INTO THE BEGINNING OF ARRAY THAT WAY WHEN WE 'pop()' IT WILL
+        //GRAB OUR FIRST NUMBER ENTERED.
+
+        numbers.unshift(current);
+
+        //TAKING OUT TWO NUMBERS TO PERFORM OUR OPERATIONS ON IT 
+        let first = numbers.pop();
+        let second = numbers.pop();
+
+        //NUMBERS ARRAY IS CURRENTLY AT LENGTH "0"
+        operate(operator,first,second);
+
     });
 }
 
@@ -179,22 +251,27 @@ function quotient(a,b){
         return a/b;
 }
 
-function operate(operator,num1,num2){
+function operate(operator,first,second){
+    if(operator === "+"){
+        ans = sum(first,second);
+    }
+    if(operator === "*"){
+        ans = product(first,second);
+    }
+
+    //WE ARE GOING TO PUSH OUR ANS BACK INTO NUMBERS ARRAY
+    numbers.unshift(ans);
+   
+    //RESET OUR DISPLAY TO ZERO TO PREVENT USING THE NUMBER TWICE WHEN PERFORMING OPERATION
+    display = "0";
     
+    
+    console.log(ans);    
 }
 
 
-returnZero();
-returnOne();
-returnTwo();
-returnThree();
-returnFour();
-returnFive();
-returnSix();
-returnSeven();
-returnEight();
-returnNine();
-reSet();
+returnNumbersOperators();
+
 
 
 
