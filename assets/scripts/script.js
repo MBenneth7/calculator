@@ -22,213 +22,215 @@ const reset =  document.querySelector(".reset");
 const numbers = [];
 
 //VARIABLES TO DISPLAY CURRENT NUMBER ON SCREEN AND CONTAIN OUR CURRENT ANSWER
-let display = "0";
+let digitInput = "0";
 let ans = 0;
 
 
 //HAVE A VARIABLE KEEP TRACK OF AN OPERATOR
 let operator = "";
 
+//COUNTER TO KEEP TRACK OF OPERATIONS OVERLAPPING EACH OTHER
+let counter = 0;
+
 function returnNumbersOperators(){
 
     zero.addEventListener("click",()=>{
-        if(display === "0")
-            display = "0";
+        if(digitInput === "0")
+            digitInput = "0";
         else{        
-            display += "0";
+            digitInput += "0";
         }    
-        console.log(display);
+        console.log(digitInput);
     });
 
     one.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "1";
+        if(digitInput === "0")
+            digitInput = "1";
         else{
-            display += "1";
+            digitInput += "1";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     two.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "2";
+        if(digitInput === "0")
+            digitInput = "2";
         else{
-            display += "2";
+            digitInput += "2";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     three.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "3";
+        if(digitInput === "0")
+            digitInput = "3";
         else{
-            display += "3";
+            digitInput += "3";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     four.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "4";
+        if(digitInput === "0")
+            digitInput = "4";
         else{
-            display += "4";
+            digitInput += "4";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     five.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "5";
+        if(digitInput === "0")
+            digitInput = "5";
         else{
-            display += "5";
+            digitInput += "5";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     six.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "6";
+        if(digitInput === "0")
+            digitInput = "6";
         else{
-            display += "6";
+            digitInput += "6";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     seven.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "7";
+        if(digitInput === "0")
+            digitInput = "7";
         else{
-            display += "7";
+            digitInput += "7";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     eight.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "8";
+        if(digitInput === "0")
+            digitInput = "8";
         else{
-            display += "8";
+            digitInput += "8";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     nine.addEventListener("click",()=>{
         //IF OUR FIRST DIGIT IN 'display' IS CURRENTLY ZERO WE REPLACE IT WITH THE FIRST NUMBER CHOSEN
         //ELSE CONCAT THE DIGIT TO THE 'display' STRING
-        if(display === "0")
-            display = "9";
+        if(digitInput === "0")
+            digitInput = "9";
         else{
-            display += "9";
+            digitInput += "9";
         }     
-        console.log(display);
+        console.log(digitInput);
     });
 
     reset.addEventListener("click",()=>{
-        display = "0";
+        digitInput = "0";
         numbers.length = 0;
-        console.log(display);
+        console.log(digitInput);
     });
 
     add.addEventListener("click",()=>{
 
-        let current = Number(display);
+        //TURNS OUR 'digitInput' FROM A STRING TYPE INTO A NUMBER TYPE
+        let current = Number(digitInput);
+
+
+        //IF STATEMENT RUNS WHEN WE CLICK ON A DIFFERENT OPERATOR AND WE WANT TO FINISH PREVIOUS OPERATION. 
+        //if statement here...
+
+
+        //ASSIGN OUR 'operator' VARIABLE A OPERATION TO PERFORM WHEN WE CALL OUR 'operate' FUNCTION
         operator = "+";
+
 
         if(numbers.length < 1){
             //ON THE FIRST START 'numbers' ARRAY LENGTH IS "0", WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE FIRST NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
             numbers.push(current);
-            display = "0";
-        }    
-        else{
-            //ON CONSECTIVE USE, WE WILL USE 'unshift()' TO PLACE SECOND NUMBER INTO THE BEGINNING OF ARRAY THAT WAY WHEN WE 'pop()' IT WILL
-            //GRAB OUR FIRST NUMBER ENTERED.
+            //RESET 'digitInput' TO '0' TO RECEIVE NEXT DIGIT
+            digitInput = "0";
+        }
+        else if(current!== 0 && operator==="+"){
 
-            numbers.push(current);
-            display = "0";
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS.
 
-            //TAKING OUT TWO NUMBERS TO PERFORM OUR OPERATIONS ON IT    
-            let first = numbers.pop();
-            let second = numbers.pop();
-
-            //NUMBERS ARRAY IS CURRENTLY AT LENGTH "0"
-            operate(operator, first, second);
-        }    
+            //WE ARE GOING TO RETREIVE OUR PREVIOUS NUMBER AND STORE IT INTO 'previous' AND PASS IT INTO OUR 'operate' FUNCTION ALONG WITH 'current' AND OUR 'operator' VARIABLES. 
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+        }
     });
 
     multiply.addEventListener("click",()=>{
 
-        let current = Number(display);
+        //TURNS OUR 'digitInput' FROM A STRING TYPE INTO A NUMBER TYPE
+        let current = Number(digitInput);
+
+        //IF STATEMENT RUNS WHEN WE CLICK ON A DIFFERENT OPERATOR AND WE WANT TO FINISH PREVIOUS OPERATION. 
+        //if statement here...
+
+        //ASSIGN OUR 'operator' VARIABLE A OPERATION TO PERFORM WHEN WE CALL OUR 'operate' FUNCTION   
         operator = "*";
 
         if(numbers.length < 1){
             //ON THE FIRST START 'numbers' ARRAY LENGTH IS "0", WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE FIRST NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
             numbers.push(current);
-            display = "0";
-        }    
-        else{
-            //ON CONSECTIVE USE, WE WILL USE 'unshift()' TO PLACE SECOND NUMBER INTO THE BEGINNING OF ARRAY THAT WAY WHEN WE 'pop()' IT WILL
-            //GRAB OUR FIRST NUMBER ENTERED.
+            //RESET 'digitInput' TO '0' TO RECEIVE NEXT DIGIT
+            digitInput = "0";
+        }
+        else if(current !== 0 && operator === "*"){
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS.
 
-            numbers.unshift(current);
-            display = "0";
-
-            //TAKING OUT TWO NUMBERS TO PERFORM OUR OPERATIONS ON IT    
-            let first = numbers.pop();
-            let second = numbers.pop();
-
-            //NUMBERS ARRAY IS CURRENTLY AT LENGTH "0"
-            operate(operator, first, second);
-        } 
+            //WE ARE GOING TO RETREIVE OUR PREVIOUS NUMBER AND STORE IT INTO 'previous' AND PASS IT INTO OUR 'operate' FUNCTION ALONG WITH 'current' AND OUR 'operator' VARIABLES. 
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+        }
     });
 
     subtract.addEventListener("click",()=>{
-        let current = Number(display);
-        //WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE CURRENT NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
-        numbers.push(current);
-        display = "0"; 
-        operator = "-";
+        
     });
 
     divide.addEventListener("click",()=>{
-        let current = Number(display);
-        //WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE CURRENT NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
-        numbers.push(current); 
-        display = "0";
-        operator = "/";
+        
     });
 
     equal.addEventListener("click",()=>{
 
-        let current = Number(display);
+        let current = Number(digitInput);
 
-        //USING 'unshift()' TO PLACE SECOND NUMBER INTO THE BEGINNING OF ARRAY THAT WAY WHEN WE 'pop()' IT WILL
-        //GRAB OUR FIRST NUMBER ENTERED.
-
-        numbers.unshift(current);
-
-        //TAKING OUT TWO NUMBERS TO PERFORM OUR OPERATIONS ON IT 
-        let first = numbers.pop();
-        let second = numbers.pop();
-
-        //NUMBERS ARRAY IS CURRENTLY AT LENGTH "0"
-        operate(operator,first,second);
-
+        if(current!==0){
+        //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+        //WHICH MAY YIELD WRONG RESULTS.  
+        
+        //WE ARE GOING TO RETREIVE OUR PREVIOUS NUMBER AND STORE IT INTO 'previous' AND PASS IT INTO OUR 'operate' FUNCTION ALONG WITH 'current' AND OUR 'operator' VARIABLES. 
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+        }
+        else{
+            //WE JUST WANT TO DISPLAY OUR ANSWER IF THE EQUAL BUTTON IS PRESSED AGAIN AND OUR 
+            //'current' VARIABLE IS STILL '0' WHICH MEANS WE ARE WAITING FOR A SECOND INPUT.
+            console.log(ans);
+        }    
     });
 }
 
@@ -260,14 +262,17 @@ function operate(operator,first,second){
     }
 
     //WE ARE GOING TO PUSH OUR ANS BACK INTO NUMBERS ARRAY
-    numbers.unshift(ans);
+    numbers.push(ans);
    
     //RESET OUR DISPLAY TO ZERO TO PREVENT USING THE NUMBER TWICE WHEN PERFORMING OPERATION
-    display = "0";
-    
+    digitInput = "0";
+    //operator = "";
+    overlap = false;
     
     console.log(ans);    
 }
+
+
 
 
 returnNumbersOperators();
