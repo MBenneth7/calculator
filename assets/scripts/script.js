@@ -29,9 +29,6 @@ let ans = 0;
 //HAVE A VARIABLE KEEP TRACK OF AN OPERATOR
 let operator = "";
 
-//COUNTER TO KEEP TRACK OF OPERATIONS OVERLAPPING EACH OTHER
-let counter = 0;
-
 function returnNumbersOperators(){
 
     zero.addEventListener("click",()=>{
@@ -145,6 +142,7 @@ function returnNumbersOperators(){
     reset.addEventListener("click",()=>{
         digitInput = "0";
         numbers.length = 0;
+        operator = "";
         console.log(digitInput);
     });
 
@@ -153,14 +151,22 @@ function returnNumbersOperators(){
         //TURNS OUR 'digitInput' FROM A STRING TYPE INTO A NUMBER TYPE
         let current = Number(digitInput);
 
-
         //IF STATEMENT RUNS WHEN WE CLICK ON A DIFFERENT OPERATOR AND WE WANT TO FINISH PREVIOUS OPERATION. 
-        //if statement here...
+        
+        if(current !== 0 && operator !== "+" && numbers.length >= 1){
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS, WE ALSO DON'T WANT TO RUN IT WHEN OUR 'numbers' ARRAY DOESN'T HAVE ANY NUMBERS IN IT YET EITHER.
+            
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+            operator = "+";
 
+            //'return' USED TO BREAK OUT OF LISTENER FUNCTION TO PREVENT RUNNING NEXT SET OF 'IF' STATEMENTS
+            return;
+        }
 
-        //ASSIGN OUR 'operator' VARIABLE A OPERATION TO PERFORM WHEN WE CALL OUR 'operate' FUNCTION
+        //ASSIGN OUR 'operator' VARIABLE A OPERATION TO PERFORM WHEN WE CALL OUR 'operate' FUNCTION   
         operator = "+";
-
 
         if(numbers.length < 1){
             //ON THE FIRST START 'numbers' ARRAY LENGTH IS "0", WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE FIRST NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
@@ -168,8 +174,7 @@ function returnNumbersOperators(){
             //RESET 'digitInput' TO '0' TO RECEIVE NEXT DIGIT
             digitInput = "0";
         }
-        else if(current!== 0 && operator==="+"){
-
+        else if(current !== 0 && operator === "+"){
             //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
             //WHICH MAY YIELD WRONG RESULTS.
 
@@ -185,7 +190,18 @@ function returnNumbersOperators(){
         let current = Number(digitInput);
 
         //IF STATEMENT RUNS WHEN WE CLICK ON A DIFFERENT OPERATOR AND WE WANT TO FINISH PREVIOUS OPERATION. 
-        //if statement here...
+        
+        if(current !== 0 && operator !== "*" && numbers.length >= 1){
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS, WE ALSO DON'T WANT TO RUN IT WHEN OUR 'numbers' ARRAY DOESN'T HAVE ANY NUMBERS IN IT YET EITHER.
+            
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+            operator = "*";
+
+            //'return' USED TO BREAK OUT OF LISTENER FUNCTION TO PREVENT RUNNING NEXT SET OF 'IF' STATEMENTS
+            return;
+        }
 
         //ASSIGN OUR 'operator' VARIABLE A OPERATION TO PERFORM WHEN WE CALL OUR 'operate' FUNCTION   
         operator = "*";
@@ -207,10 +223,80 @@ function returnNumbersOperators(){
     });
 
     subtract.addEventListener("click",()=>{
+
+        //TURNS OUR 'digitInput' FROM A STRING TYPE INTO A NUMBER TYPE
+        let current = Number(digitInput);
+
+        //IF STATEMENT RUNS WHEN WE CLICK ON A DIFFERENT OPERATOR AND WE WANT TO FINISH PREVIOUS OPERATION. 
+        
+        if(current !== 0 && operator !== "-" && numbers.length >= 1){
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS, WE ALSO DON'T WANT TO RUN IT WHEN OUR 'numbers' ARRAY DOESN'T HAVE ANY NUMBERS IN IT YET EITHER.
+            
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+            operator = "-";
+
+            //'return' USED TO BREAK OUT OF LISTENER FUNCTION TO PREVENT RUNNING NEXT SET OF 'IF' STATEMENTS
+            return;
+        }
+
+        //ASSIGN OUR 'operator' VARIABLE A OPERATION TO PERFORM WHEN WE CALL OUR 'operate' FUNCTION   
+        operator = "-";
+
+        if(numbers.length < 1){
+            //ON THE FIRST START 'numbers' ARRAY LENGTH IS "0", WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE FIRST NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
+            numbers.push(current);
+            //RESET 'digitInput' TO '0' TO RECEIVE NEXT DIGIT
+            digitInput = "0";
+        }
+        else if(current !== 0 && operator === "-"){
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS.
+
+            //WE ARE GOING TO RETREIVE OUR PREVIOUS NUMBER AND STORE IT INTO 'previous' AND PASS IT INTO OUR 'operate' FUNCTION ALONG WITH 'current' AND OUR 'operator' VARIABLES. 
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+        }
         
     });
 
     divide.addEventListener("click",()=>{
+
+        //TURNS OUR 'digitInput' FROM A STRING TYPE INTO A NUMBER TYPE
+        let current = Number(digitInput);
+
+        //IF STATEMENT RUNS WHEN WE CLICK ON A DIFFERENT OPERATOR AND WE WANT TO FINISH PREVIOUS OPERATION. 
+        
+        if(current !== 0 && operator !== "/" && numbers.length >= 1){
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS, WE ALSO DON'T WANT TO RUN IT WHEN OUR 'numbers' ARRAY DOESN'T HAVE ANY NUMBERS IN IT YET EITHER.
+            
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+            operator = "/";
+
+            //'return' USED TO BREAK OUT OF LISTENER FUNCTION TO PREVENT RUNNING NEXT SET OF 'IF' STATEMENTS
+            return;
+        }
+
+        //ASSIGN OUR 'operator' VARIABLE A OPERATION TO PERFORM WHEN WE CALL OUR 'operate' FUNCTION   
+        operator = "/";
+
+        if(numbers.length < 1){
+            //ON THE FIRST START 'numbers' ARRAY LENGTH IS "0", WHEN WE CLICK ON AN OPERATOR WE WILL PUSH THE FIRST NUMBER ENTERED TO AN ARRAY TO KEEP TRACK OF IT.
+            numbers.push(current);
+            //RESET 'digitInput' TO '0' TO RECEIVE NEXT DIGIT
+            digitInput = "0";
+        }
+        else if(current !== 0 && operator === "/"){
+            //RUNS WHEN OUR 'current' VARIABLE ISN'T '0'. WE DON'T WANT IT TO OPERATE IF IT EQUALS '0', BECAUSE IT MAY INADVERTENTLY RUN 'operate' FUNCTION TWICE
+            //WHICH MAY YIELD WRONG RESULTS.
+
+            //WE ARE GOING TO RETREIVE OUR PREVIOUS NUMBER AND STORE IT INTO 'previous' AND PASS IT INTO OUR 'operate' FUNCTION ALONG WITH 'current' AND OUR 'operator' VARIABLES. 
+            let previous = numbers.pop();
+            operate(operator,previous,current);
+        }
         
     });
 
@@ -257,19 +343,23 @@ function operate(operator,first,second){
     if(operator === "+"){
         ans = sum(first,second);
     }
-    if(operator === "*"){
+    else if(operator === "*"){
         ans = product(first,second);
+    }
+    else if(operator === "-"){
+        ans = difference(first,second);
+    }
+    else if(operator === "/"){
+        ans = quotient(first,second);        
     }
 
     //WE ARE GOING TO PUSH OUR ANS BACK INTO NUMBERS ARRAY
     numbers.push(ans);
    
-    //RESET OUR DISPLAY TO ZERO TO PREVENT USING THE NUMBER TWICE WHEN PERFORMING OPERATION
+    //RESET OUR "digitInput" TO ZERO TO PREVENT USING THE NUMBER TWICE WHEN PERFORMING OPERATION
     digitInput = "0";
-    //operator = "";
-    overlap = false;
     
-    console.log(ans);    
+    console.log(ans);
 }
 
 
