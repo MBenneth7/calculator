@@ -86,13 +86,13 @@ body{
 }
 
 .add{
-    grid-area: sum
+    grid-area: sum;
 }
 
 .zero{
     grid-area: ze;
     justify-content: flex-start;
-    padding-left: 39px;
+    padding-left: 40px;
 }
 
 .decimal{
@@ -107,7 +107,7 @@ body{
     grid-area: display;
     border: 1px solid black;
     justify-content: flex-end;
-    padding-right: 20px;
+    padding-right: 40px;
 }
 
 

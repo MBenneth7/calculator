@@ -148,8 +148,14 @@ function returnNumbersOperators(){
 
     add.addEventListener("click",()=>{
 
+        //IF STATEMENT TO CHECK ANY UNECESSARY "." AT THE END OF NUMBER (decimcal points) IN STRING BEFORE CONVERTING INTO A NUMBER TYPE (CURRENTLY "digitInput")
+        let decimalIndex = digitInput.indexOf(".");
+        if(decimalIndex > -1)
+            digitInput.replace(decimalIndex,"");
+
         //TURNS OUR 'digitInput' FROM A STRING TYPE INTO A NUMBER TYPE
         let current = Number(digitInput);
+
 
         //IF STATEMENT RUNS WHEN WE CLICK ON A DIFFERENT OPERATOR AND WE WANT TO FINISH PREVIOUS OPERATION. 
         
@@ -317,6 +323,34 @@ function returnNumbersOperators(){
             //'current' VARIABLE IS STILL '0' WHICH MEANS WE ARE WAITING FOR A SECOND INPUT.
             console.log(ans);
         }    
+    });
+
+    decimal.addEventListener("click", ()=>{
+
+        let decimalIndex = digitInput.indexOf(".");
+
+        //IF WE HAVE A DECIMAL POINT IN OUR NUMBER ALREADY, PREVENT USER FROM INPUTTING ANOTHER ONE, BREAK OUT OF EVENT
+        if(decimalIndex !== -1)
+            return;
+        else{
+            digitInput += ".";
+        }
+        
+        console.log(digitInput);
+    });
+
+    negPos.addEventListener("click", ()=>{
+
+        let negativeIndex = digitInput.indexOf("-");
+
+        //IF WE HAVE A NEGATIVE ALREADY AND WE PRESS IT AGAIN REMOVE THE NEGATIVE, INDICATING IT IS POSITIVE. ELSE ADD NEGATIVE TO THE BEGINNING OF "digitInput" STRING
+        if(negativeIndex !== -1)
+            digitInput = digitInput.replace(negativeIndex,"");
+        else{
+            digitInput = digitInput.replace(/^/,"-");
+        }      
+        
+        console.log(digitInput);    
     });
 }
 
