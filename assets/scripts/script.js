@@ -143,6 +143,7 @@ function returnNumbersOperators(){
         digitInput = "0";
         numbers.length = 0;
         operator = "";
+        ans = 0;
         console.log(digitInput);
     });
 
