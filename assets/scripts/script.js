@@ -308,6 +308,14 @@ function returnNumbersOperators(){
 
     equal.addEventListener("click",()=>{
 
+        //CHECKS IF USER DOES NOT INPUT A DIGIT AFTER PRESSING "decimal",
+        //WILL RETURN "0"
+
+        let lastIndex = digitInput[digitInput.length-1]; 
+
+        if(lastIndex === ".")
+            digitInput = digitInput.replace(lastIndex,"");
+
         let current = Number(digitInput);
 
         if(current!==0){
@@ -345,7 +353,7 @@ function returnNumbersOperators(){
 
         //IF WE HAVE A NEGATIVE ALREADY AND WE PRESS IT AGAIN REMOVE THE NEGATIVE, INDICATING IT IS POSITIVE. ELSE ADD NEGATIVE TO THE BEGINNING OF "digitInput" STRING
         if(negativeIndex !== -1)
-            digitInput = digitInput.replace(negativeIndex,"");
+            digitInput = digitInput.replace(digitInput[negativeIndex],"");
         else{
             digitInput = digitInput.replace(/^/,"-");
         }      
