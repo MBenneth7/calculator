@@ -25,6 +25,8 @@ const numbers = [];
 let digitInput = "0";
 let ans = 0;
 
+let decimalIndex = 0;
+let newPlace = 0;
 
 //HAVE A VARIABLE KEEP TRACK OF AN OPERATOR
 let operator = "";
@@ -341,11 +343,55 @@ function returnNumbersOperators(){
         //IF WE HAVE A DECIMAL POINT IN OUR NUMBER ALREADY, PREVENT USER FROM INPUTTING ANOTHER ONE, BREAK OUT OF EVENT
         if(decimalIndex !== -1)
             return;
-        else{
+        else if(decimalIndex > 1)
+            digitInput = "0";
+        else
             digitInput += ".";
-        }
         
         console.log(digitInput);
+    });
+
+    
+
+    percent.addEventListener("click",()=>{
+
+        //CHECK IF WE HAVE A DECIMAL POINT YET
+        decimalIndex = digitInput.indexOf(".");
+
+        //IF WE HAVE ONE THEN MOVE THAT DECIMAL POINT TWO SPACES TO THE LEFT FROM THAT POINT
+        if(decimalIndex !== -1){
+
+            //FIND THE INDEX WE WANT TO PLACE OUR DECIMAL POINT FROM THE ORIGINAL DECIMAL INDEX
+            newPlace = decimalIndex - 2;
+
+            //"decimal" WILL GRAB "." FROM THE ARRAY AND STORE IT
+            let decimal = digitInput.slice(decimalIndex,decimalIndex+1);
+
+            //MUTATE THE ORIGINAL STRING REMOVE THE DECIMAL POINT
+            digitInput = digitInput.slice(0, decimalIndex) + digitInput.slice(decimalIndex+1);
+
+            //MUTATE THE STRING "digitsInput" USING SLICE METHOD TWICE AND ADD THE "." TO THE NEW INDEX
+            digitInput = digitInput.substring(0,newPlace) + decimal + digitInput.substring(newPlace);
+        }
+        //ELSE ADD A DECIMAL POINT FROM THE END OF THE NUMBER AND MOVE IT TWO SPACES FROM THAT POINT
+        else{
+            digitInput += ".";
+            decimalIndex = digitInput.length-1;
+            //FIND THE INDEX WE WANT TO PLACE OUR DECIMAL POINT FROM THE ORIGINAL DECIMAL INDEX
+            let newPlace = decimalIndex - 2;
+
+            //"decimal" WILL GRAB "." FROM THE ARRAY AND STORE IT
+            let decimal = digitInput.slice(decimalIndex,decimalIndex+1);
+
+            //MUTATE THE ORIGINAL STRING REMOVE THE DECIMAL POINT USING THE SLICE METHOD
+            digitInput = digitInput.slice(0, decimalIndex) + digitInput.slice(decimalIndex+1);
+
+            //MUTATE THE STRING "digitsInput" USING SUBSTRING METHOD TWICE AND ADD THE "." TO THE NEW INDEX
+            digitInput = digitInput.substring(0,newPlace) + decimal + digitInput.substring(newPlace);
+        }
+
+        console.log(digitInput);
+
     });
 
     negPos.addEventListener("click", ()=>{
