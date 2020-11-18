@@ -355,40 +355,14 @@ function returnNumbersOperators(){
 
     percent.addEventListener("click",()=>{
 
-        //CHECK IF WE HAVE A DECIMAL POINT YET
-        decimalIndex = digitInput.indexOf(".");
+        //TAKE STRING AND CONVERT IT INTO A NUMBER
+        let percentage = Number(digitInput);
 
-        //IF WE HAVE ONE THEN MOVE THAT DECIMAL POINT TWO SPACES TO THE LEFT FROM THAT POINT
-        if(decimalIndex !== -1){
+        //PERFORM OPERATIONS TO CHANGE IT INTO A PERCENT
+        percentage = percentage/100;
 
-            //FIND THE INDEX WE WANT TO PLACE OUR DECIMAL POINT FROM THE ORIGINAL DECIMAL INDEX
-            newPlace = decimalIndex - 2;
-
-            //"decimal" WILL GRAB "." FROM THE ARRAY AND STORE IT
-            let decimal = digitInput.slice(decimalIndex,decimalIndex+1);
-
-            //MUTATE THE ORIGINAL STRING REMOVE THE DECIMAL POINT
-            digitInput = digitInput.slice(0, decimalIndex) + digitInput.slice(decimalIndex+1);
-
-            //MUTATE THE STRING "digitsInput" USING SLICE METHOD TWICE AND ADD THE "." TO THE NEW INDEX
-            digitInput = digitInput.substring(0,newPlace) + decimal + digitInput.substring(newPlace);
-        }
-        //ELSE ADD A DECIMAL POINT FROM THE END OF THE NUMBER AND MOVE IT TWO SPACES FROM THAT POINT
-        else{
-            digitInput += ".";
-            decimalIndex = digitInput.length-1;
-            //FIND THE INDEX WE WANT TO PLACE OUR DECIMAL POINT FROM THE ORIGINAL DECIMAL INDEX
-            let newPlace = decimalIndex - 2;
-
-            //"decimal" WILL GRAB "." FROM THE ARRAY AND STORE IT
-            let decimal = digitInput.slice(decimalIndex,decimalIndex+1);
-
-            //MUTATE THE ORIGINAL STRING REMOVE THE DECIMAL POINT USING THE SLICE METHOD
-            digitInput = digitInput.slice(0, decimalIndex) + digitInput.slice(decimalIndex+1);
-
-            //MUTATE THE STRING "digitsInput" USING SUBSTRING METHOD TWICE AND ADD THE "." TO THE NEW INDEX
-            digitInput = digitInput.substring(0,newPlace) + decimal + digitInput.substring(newPlace);
-        }
+        //CHANGE IT BACK INTO A STRING AND ASSIGN IT TO "digitInput"
+        digitInput = String(percentage);
 
         console.log(digitInput);
 
