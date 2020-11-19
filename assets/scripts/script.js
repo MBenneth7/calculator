@@ -20,6 +20,7 @@ const reset =  document.querySelector(".reset");
 
 //ARRAY AND TO KEEP TRACK OF NUMBERS BEING INPUT BY USER, OUR ARRAY WILL HOLD TWO NUMBERS AT MOST.
 const numbers = [];
+const p = [];
 
 //VARIABLES TO DISPLAY CURRENT NUMBER ON SCREEN AND CONTAIN OUR CURRENT ANSWER
 let digitInput = "0";
@@ -138,14 +139,6 @@ function returnNumbersOperators(){
         else{
             digitInput += "9";
         }     
-        console.log(digitInput);
-    });
-
-    reset.addEventListener("click",()=>{
-        digitInput = "0";
-        numbers.length = 0;
-        operator = "";
-        ans = 0;
         console.log(digitInput);
     });
 
@@ -309,6 +302,35 @@ function returnNumbersOperators(){
         
     });
 
+    percent.addEventListener("click",()=>{
+        
+        //MAKE THE PERCENT FUNCTION INDEPENDENT OF OTHER FUNCTIONS
+        let perAns = 0;
+        //IF NUMBERS ARRAY IS EMPTY FIND PERCENTAGE OF CURRENT "digitInput"  
+        if(numbers.length === 0){
+            //TAKE INPUT AND TURN INTO STRING
+            let current = Number(digitInput);
+            perAns = percentage(current);
+            p.push(perAns);
+        }
+        else{
+            let previous = p.pop();
+            perAns = percentage(previous)
+            p.push(perAns);
+        }    
+        digitInput = String(perAns);
+        console.log(Number(digitInput));
+    });
+
+    reset.addEventListener("click",()=>{
+        digitInput = "0";
+        numbers.length = 0;
+        operator = "";
+        ans = 0;
+        p.length = 0;
+        console.log(digitInput);
+    });
+
     equal.addEventListener("click",()=>{
 
         //CHECKS IF USER DOES NOT INPUT A DIGIT AFTER PRESSING "decimal",
@@ -351,23 +373,6 @@ function returnNumbersOperators(){
         console.log(digitInput);
     });
 
-    
-
-    percent.addEventListener("click",()=>{
-
-        //TAKE STRING AND CONVERT IT INTO A NUMBER
-        let percentage = Number(digitInput);
-
-        //PERFORM OPERATIONS TO CHANGE IT INTO A PERCENT
-        percentage = percentage/100;
-
-        //CHANGE IT BACK INTO A STRING AND ASSIGN IT TO "digitInput"
-        digitInput = String(percentage);
-
-        console.log(digitInput);
-
-    });
-
     negPos.addEventListener("click", ()=>{
 
         let negativeIndex = digitInput.indexOf("-");
@@ -400,6 +405,10 @@ function quotient(a,b){
         return "DNE";
     else    
         return a/b;
+}
+
+function percentage(a){
+    return a/100;
 }
 
 function operate(operator,first,second){
