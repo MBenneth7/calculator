@@ -307,7 +307,7 @@ function returnNumbersOperators(){
         //MAKE THE PERCENT FUNCTION INDEPENDENT OF OTHER FUNCTIONS
         let perAns = 0;
         //IF NUMBERS ARRAY IS EMPTY FIND PERCENTAGE OF CURRENT "digitInput"  
-        if(numbers.length === 0){
+        if(p.length === 0){
             //TAKE INPUT AND TURN INTO STRING
             let current = Number(digitInput);
             perAns = percentage(current);
@@ -319,7 +319,7 @@ function returnNumbersOperators(){
             p.push(perAns);
         }    
         digitInput = String(perAns);
-        console.log(Number(digitInput));
+        console.log(digitInput);
     });
 
     reset.addEventListener("click",()=>{
