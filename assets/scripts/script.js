@@ -303,28 +303,21 @@ function returnNumbersOperators(){
     });
 
     percent.addEventListener("click",()=>{
-        
-        //MAKE THE PERCENT FUNCTION INDEPENDENT OF OTHER FUNCTIONS
-        let perAns = 0;
-        //IF NUMBERS ARRAY IS EMPTY FIND PERCENTAGE OF CURRENT "digitInput"  
-        if(p.length === 0){
-            //TAKE INPUT AND TURN INTO STRING
+    
+        //IF WE WANT TO FIND THE PERCENTAGE OF THE NUMBER OF OUR ANSWER
+        //ELSE IF WE WANT TO FIND THE PERCENTAGE OF THE NUMBERS WE ARE PERFORMING OPERATIONS ON
+        if(digitInput==="0"){
+            let previous = numbers.pop();
+            ans = percentage(previous);
+            numbers.push(ans);
+            console.log(ans);
+        }
+        else{    
             let current = Number(digitInput);
-            perAns = percentage(current);
-            p.push(perAns);
+            let percent = percentage(current);
+            digitInput = String(percent);
+            console.log(digitInput);
         }
-        else if(digitInput==="0"){ //IF WE JUST WANT TO FIND THE PERCENTAGE OF THE ANSWER
-            perAns = percentage(ans);
-            p.push(perAns);
-            numbers.push(perAns);
-        }
-        else{
-            let previous = p.pop();
-            perAns = percentage(previous)
-            p.push(perAns);
-        }    
-        digitInput = String(perAns);
-        console.log(digitInput);
     });
 
     reset.addEventListener("click",()=>{
