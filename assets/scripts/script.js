@@ -313,6 +313,11 @@ function returnNumbersOperators(){
             perAns = percentage(current);
             p.push(perAns);
         }
+        else if(digitInput==="0"){ //IF WE JUST WANT TO FIND THE PERCENTAGE OF THE ANSWER
+            perAns = percentage(ans);
+            p.push(perAns);
+            numbers.push(perAns);
+        }
         else{
             let previous = p.pop();
             perAns = percentage(previous)
