@@ -17,10 +17,10 @@ const divide =  document.querySelector(".divide");
 const percent =  document.querySelector(".percent");
 const negPos =  document.querySelector(".neg-pos");
 const reset =  document.querySelector(".reset");
+const display = document.querySelector("#display");
 
 //ARRAY AND TO KEEP TRACK OF NUMBERS BEING INPUT BY USER, OUR ARRAY WILL HOLD TWO NUMBERS AT MOST.
 const numbers = [];
-const p = [];
 
 //VARIABLES TO DISPLAY CURRENT NUMBER ON SCREEN AND CONTAIN OUR CURRENT ANSWER
 let digitInput = "0";
@@ -40,7 +40,8 @@ function returnNumbersOperators(){
         else{        
             digitInput += "0";
         }    
-        console.log(digitInput);
+        //console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     one.addEventListener("click",()=>{
@@ -52,6 +53,7 @@ function returnNumbersOperators(){
             digitInput += "1";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     two.addEventListener("click",()=>{
@@ -63,6 +65,7 @@ function returnNumbersOperators(){
             digitInput += "2";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     three.addEventListener("click",()=>{
@@ -74,6 +77,7 @@ function returnNumbersOperators(){
             digitInput += "3";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     four.addEventListener("click",()=>{
@@ -85,6 +89,7 @@ function returnNumbersOperators(){
             digitInput += "4";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     five.addEventListener("click",()=>{
@@ -96,6 +101,7 @@ function returnNumbersOperators(){
             digitInput += "5";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     six.addEventListener("click",()=>{
@@ -107,6 +113,7 @@ function returnNumbersOperators(){
             digitInput += "6";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     seven.addEventListener("click",()=>{
@@ -118,6 +125,7 @@ function returnNumbersOperators(){
             digitInput += "7";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     eight.addEventListener("click",()=>{
@@ -129,6 +137,7 @@ function returnNumbersOperators(){
             digitInput += "8";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     nine.addEventListener("click",()=>{
@@ -140,6 +149,7 @@ function returnNumbersOperators(){
             digitInput += "9";
         }     
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     add.addEventListener("click",()=>{
@@ -311,16 +321,19 @@ function returnNumbersOperators(){
             ans = percentage(previous);
             numbers.push(ans);
             console.log(ans);
+            display.textContent = ans;
         }
         else{    
             let current = Number(digitInput);
             let percent = percentage(current);
             digitInput = String(percent);
             console.log(digitInput);
+            display.textContent = digitInput;
         }
     });
 
     reset.addEventListener("click",()=>{
+        display.textContent = "0";
         digitInput = "0";
         numbers.length = 0;
         operator = "";
@@ -353,6 +366,7 @@ function returnNumbersOperators(){
             //WE JUST WANT TO DISPLAY OUR ANSWER IF THE EQUAL BUTTON IS PRESSED AGAIN AND OUR 
             //'current' VARIABLE IS STILL '0' WHICH MEANS WE ARE WAITING FOR A SECOND INPUT.
             console.log(ans);
+            display.textContent = ans;
         }    
     });
 
@@ -369,6 +383,7 @@ function returnNumbersOperators(){
             digitInput += ".";
         
         console.log(digitInput);
+        display.textContent = digitInput;
     });
 
     negPos.addEventListener("click", ()=>{
@@ -382,7 +397,8 @@ function returnNumbersOperators(){
             digitInput = digitInput.replace(/^/,"-");
         }      
         
-        console.log(digitInput);    
+        console.log(digitInput);
+        display.textContent = digitInput;    
     });
 }
 
@@ -430,6 +446,7 @@ function operate(operator,first,second){
     digitInput = "0";
     
     console.log(ans);
+    display.textContent = ans;
 }
 
 
